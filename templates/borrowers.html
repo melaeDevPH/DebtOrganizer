@@ -66,56 +66,161 @@
             <div class="d-flex justify-content-between align-items-center">
                 <p class="text-white mb-0">Recent Borrower</p>
                 {% if borrowers|length > 3 %}
-                    <button class="btn btn-primary mb-1" onclick="location.href='/all-borrowers'">
+                    <button class="btn btn-primary mb-1" onclick="location.href='#allItems'">
                         View all <i class="bi bi-chevron-right fs-6"></i>
                     </button>
                 {% endif %}
             </div>
+       
             
-            {% for borrower in borrowers[:3] %} 
-            <div class="col-md-4">
-                <div class="borrower-card random-bg">
-                    <div class="dropdown">
-                        <button class="btn btn-light">⋮</button>
-                        <div class="dropdown-content">
-                            <a href="/edit/{{ borrower[0] }}">Edit</a>
-                            <form action="/delete/{{ borrower[0] }}" method="POST" onsubmit="return confirm('Do you want to delete this record?')">
-                                <button type="submit">Delete</button>
-                            </form>
-                            <form action="/mark-paid/{{ borrower[0] }}" method="POST" onsubmit="return confirm('Mark as paid?')">
-                                <button type="submit">Paid</button>
-                            </form>
+                {% for borrower in borrowers[:3] %} 
+                <div class="col-md-4">
+                    <div class="borrower-card random-bg">
+                        <h5 class="borrower-title">{{ borrower[1] }}</h5>
+                        <h5 class="card-title fw-bold">Loan Details</h5>
+                        <div class="d-flex justify-content-between">
+                            <span><strong>Loan Type:</strong></span>
+                            <span>{{ borrower[2] }}</span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span><strong>Payment Day:</strong></span>
+                            <span>{{ borrower[3] }}</span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span><strong>Due Date:</strong></span>
+                            <span>{{ borrower[4] }}</span>
+                        </div>
+                        <div class="d-flex justify-content-between text-warning fw-bold">
+                            <span><strong>Amount:</strong></span>
+                            <span>₱{{ borrower[5] }}</span>
+                        </div>
+                        <div class="d-flex justify-content-between fw-bold">
+                            <span><strong>Status:</strong></span>
+                           <span class="{{ 'text-danger' if borrower[6].strip().lower() == 'unpaid' else 'text-success' }}">
+                        {{ borrower[6] }}
+                    </span>
+    
                         </div>
                     </div>
-                    <h5 class="borrower-title">{{ borrower[1] }}</h5>
-                    <h5 class="card-title fw-bold">Loan Details</h5>
-                    <div class="d-flex justify-content-between">
-                        <span><strong>Loan Type:</strong></span>
-                        <span>{{ borrower[2] }}</span>
+                </div>
+                {% endfor %}
+          
+          
+        </div>
+        <p class="text-white">Borrowers List</p>
+        <section id="allItems" class="container py-3">
+            <div class="card shadow-sm rounded-4 border-0">
+                <div class="card-header bg-primary text-white rounded-top-4">
+                    <h5 class="mb-0 text-center">Loan Transactions</h5>
+                </div>
+                <div class="card-body p-0">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="bg-light text-secondary">
+                            <tr>
+                                <th class="text-center">#</th>
+                                <th>Name</th>
+                                <th>Loan Type</th>
+                                <th>Payment Day</th>
+                                <th>Due Date</th>
+                                <th class="text-end">Amount</th>
+                                <th class="text-center">Status</th>
+                                <th class="text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for borrower in borrowers %}
+                            <tr class="border-bottom">
+                                <td class="text-center fw-bold">{{ loop.index }}</td>
+                                <td class="fw-semibold">{{ borrower[1] }}</td>
+                                <td>{{ borrower[2] }}</td>
+                                <td>{{ borrower[3] }}</td>
+                                <td>{{ borrower[4] }}</td>
+                                <td class="text-warning fw-bold text-end">₱{{ borrower[5] }}</td>
+                                <td class="text-center">
+                                    <span class="badge {% if borrower[6].strip().lower() == 'unpaid' %}bg-danger{% else %}bg-success{% endif %}">
+                                        {{ borrower[6] }}
+                                    </span>
+                                </td>
+                                <td class="text-center">
+                                    <div class="d-flex justify-content-center gap-2">
+                                        <a href="/edit/{{ borrower[0] }}" class="btn btn-sm btn-outline-primary px-3">Edit</a>
+                                        <form action="/delete/{{ borrower[0] }}" method="POST" class="d-inline"
+                                              onsubmit="return confirm('Do you want to delete this record?')">
+                                            <button type="submit" class="btn btn-sm btn-outline-danger px-3">Delete</button>
+                                        </form>
+                                        <form action="/mark-paid/{{ borrower[0] }}" method="POST" class="d-inline"
+                                              onsubmit="return confirm('Mark as paid?')">
+                                            <button type="submit" class="btn btn-sm btn-outline-success px-3">Paid</button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+        
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-md-8">
+                    <div id="calendarCard" class="card card-custom">
+                        <div class="header-custom">
+                            <button class="btn btn-light btn-sm float-start" onclick="prevMonth()">&#10094; Prev</button>
+                            <h4 id="monthYear" class="d-inline">March 2025</h4>
+                            <button class="btn btn-light btn-sm float-end" onclick="nextMonth()">Next &#10095;</button>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Sun</th>
+                                        <th>Mon</th>
+                                        <th>Tue</th>
+                                        <th>Wed</th>
+                                        <th>Thu</th>
+                                        <th>Fri</th>
+                                        <th>Sat</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="calendarBody"></tbody>
+                            </table>
+                        </div>
                     </div>
-                    <div class="d-flex justify-content-between">
-                        <span><strong>Payment Day:</strong></span>
-                        <span>{{ borrower[3] }}</span>
-                    </div>
-                    <div class="d-flex justify-content-between">
-                        <span><strong>Due Date:</strong></span>
-                        <span>{{ borrower[4] }}</span>
-                    </div>
-                    <div class="d-flex justify-content-between text-warning fw-bold">
-                        <span><strong>Amount:</strong></span>
-                        <span>₱{{ borrower[5] }}</span>
-                    </div>
-                    <div class="d-flex justify-content-between fw-bold">
-                        <span><strong>Status:</strong></span>
-                        <span class="{{ 'text-danger' if borrower[6].strip().lower() == 'unpaid' else 'text-success' }}">
-                            {{ borrower[6] }}
-                        </span>                        
+                </div>
+                
+                <!-- Calculator Column -->
+                <div class="col-md-4">
+                    <div id="calculatorCard" class="card card-custom">
+                        <div class="header-custom">Interest Calculator</div>
+                        <div class="card-body">
+                            <form id="calculatorForm">
+                                <div class="mb-3">
+                                    <label for="amount" class="form-label">Loan Amount</label>
+                                    <input type="number" id="amount" class="form-control" placeholder="Enter amount">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="interestRate" class="form-label">Interest Rate (%)</label>
+                                    <input type="number" id="interestRate" class="form-control" placeholder="Enter interest rate">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="years" class="form-label">Number of Years</label>
+                                    <input type="number" id="years" class="form-control" placeholder="Enter number of years">
+                                </div>
+                                <button type="submit" class="btn-custom">Calculate</button>
+                            </form>
+                            <div id="result" class="mt-3"></div>
+                        </div>
                     </div>
                 </div>
             </div>
-            {% endfor %}
         </div>
-        
+        <br>
+       
+    
+    </div>
+      
         
         
     </div>
@@ -165,17 +270,19 @@
     
    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- for card animation ni -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             gsap.from(".col-md-4 .card", {
                 opacity: 0,
                 y: 30,
                 duration: 0.8,
-                stagger: 0.2, // Each card animates with a delay
+                stagger: 0.2, 
                 ease: "power2.out"
             });
         });
     </script>
+    <!-- Color2x background sa card -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const cards = document.querySelectorAll(".random-bg");
@@ -200,12 +307,13 @@
         });
     </script>
  
+ <!-- Navbar mo glass di mo work -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
     const navbar = document.querySelector(".navbar");
 
     window.addEventListener("scroll", function () {
-        if (window.scrollY > 50) { // Adjust the scroll threshold as needed
+        if (window.scrollY > 50) { 
             navbar.classList.add("scrolled");
         } else {
             navbar.classList.remove("scrolled");
@@ -213,6 +321,94 @@
     });
 });
 
+    </script>
+
+    <script>
+        let currentDate = new Date();
+        function getDates(className, attr) {
+            let dates = [];
+            document.querySelectorAll(`.${className}`).forEach((cell) => {
+                let date = new Date(cell.dataset[attr]);
+                if (!isNaN(date)) {
+                    dates.push(date.toISOString().split("T")[0]); 
+                }
+            });
+            return dates;
+        }
+    
+        function generateCalendar(year, month) {
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            const calendarBody = document.getElementById("calendarBody");
+            const monthYear = document.getElementById("monthYear");
+    
+            calendarBody.innerHTML = "";
+            monthYear.textContent = new Date(year, month).toLocaleString('default', { month: 'long', year: 'numeric' });
+    
+            let row = document.createElement("tr");
+            const dueDates = getDates("due-date", "dueDate");
+            const paymentDays = getDates("payment-day", "paymentDay");
+    
+            for (let i = 0; i < firstDay; i++) {
+                row.appendChild(document.createElement("td"));
+            }
+    
+            for (let day = 1; day <= daysInMonth; day++) {
+                if (row.children.length === 7) {
+                    calendarBody.appendChild(row);
+                    row = document.createElement("tr");
+                }
+    
+                let cell = document.createElement("td");
+                cell.textContent = day;
+                cell.classList.add("p-3", "fw-bold", "bg-light");
+    
+                let dateStr = new Date(year, month, day).toISOString().split("T")[0];
+    
+                if (dueDates.includes(dateStr)) {
+                    cell.classList.add("bg-danger", "text-white", "rounded"); // Due date (Red)
+                }
+                if (paymentDays.includes(dateStr)) {
+                    cell.classList.add("bg-success", "text-white", "rounded"); // Payment day (Green)
+                }
+    
+                row.appendChild(cell);
+            }
+            calendarBody.appendChild(row);
+        }
+    
+        function prevMonth() {
+            currentDate.setMonth(currentDate.getMonth() - 1);
+            generateCalendar(currentDate.getFullYear(), currentDate.getMonth());
+        }
+    
+        function nextMonth() {
+            currentDate.setMonth(currentDate.getMonth() + 1);
+            generateCalendar(currentDate.getFullYear(), currentDate.getMonth());
+        }
+    
+        document.addEventListener("DOMContentLoaded", () => {
+            generateCalendar(currentDate.getFullYear(), currentDate.getMonth());
+        });
+    </script>
+
+
+<!-- Interest calculator -->
+     <script>
+        document.getElementById("calculatorForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            const amount = parseFloat(document.getElementById("amount").value);
+            const interestRate = parseFloat(document.getElementById("interestRate").value);
+            const years = parseInt(document.getElementById("years").value);
+    
+            const interest = (amount * interestRate / 100) * years;
+            const totalBalance = amount + interest;
+    
+            document.getElementById("result").innerHTML = `
+                <p>Interest: ${interest.toFixed(2)}</p>
+                <p>Total Balance: ${totalBalance.toFixed(2)}</p>
+            `;
+        });
     </script>
     
 </body>
