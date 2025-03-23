@@ -4,17 +4,17 @@
 body {
     margin: 0;
     padding: 0;
-    padding-top: 80px; 
+    margin-top: 10%; 
     min-height: 100vh;
     background: linear-gradient(to bottom, #0079C1, #66B2FF);
     font-family: Poppins;
 
 }
 .navbar-brand {
-    font-family: 'Poppins', sans-serif; /* GCash-like font */
+    font-family: 'Poppins', sans-serif; 
     font-size: 24px;
     font-weight: bold;
-    background-image: linear-gradient(45deg, #0079C1, #003366); /* GCash blue tones */
+    background-image: linear-gradient(45deg, #0079C1, #003366); 
     color: transparent;
     background-clip: text;
     -webkit-background-clip: text;

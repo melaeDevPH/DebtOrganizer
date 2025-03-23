@@ -11,6 +11,7 @@ def my_table():
     conn.close()
     return result is not None
 
+
 def init_db():
     if not my_table():
         conn = sqlite3.connect('debtorg.db')
@@ -34,9 +35,6 @@ def init_db():
 def index():
     return render_template('index.html')
 
-@app.route('/calculator')
-def calc():
-    return render_template('calculator.html')
 
 @app.route('/add_borrower', methods=['POST'])
 def add_borrower():
@@ -55,6 +53,8 @@ def add_borrower():
     conn.close()
 
     return redirect(url_for('view_borrowers'))
+
+
 
 # Display borrowers
 @app.route('/borrowers')
@@ -77,6 +77,8 @@ def view_borrowers():
 
     return render_template('borrowers.html', borrowers=borrowers, borrower_count=borrower_count, total_amount=total_amount)
 
+
+
 # For editing
 @app.route('/edit/<int:id>', methods=['GET'])
 def edit_borrower(id):
@@ -90,6 +92,7 @@ def edit_borrower(id):
         return render_template('edit_borrower.html', borrower=borrower)
     else:
         return redirect(url_for('view_borrowers'))
+
 
 # For updating
 @app.route('/update_borrower/<int:id>', methods=['POST'])
@@ -123,6 +126,8 @@ def delete_record(id):
 
     return redirect(url_for('view_borrowers'))
 
+
+
 @app.route('/mark-paid/<int:borrower_id>', methods=['POST'])
 def mark_paid(borrower_id):
     try:
@@ -135,6 +140,8 @@ def mark_paid(borrower_id):
     finally:
         conn.close()
     return redirect(url_for('view_borrowers'))
+
+
 
 if __name__ == '__main__':
     init_db()

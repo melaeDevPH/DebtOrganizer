@@ -1,0 +1,98 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+
+body {
+    background: linear-gradient(135deg, #0077b6, #00b4d8);
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.container {
+    max-width: 900px;
+    width: 100%;
+}
+.card {
+    background: #fff;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    color: #333;
+    transition: transform 0.3s ease-in-out;
+}
+.card:hover {
+    transform: scale(1.02);
+}
+.form-label {
+    font-weight: bold;
+    color: #0077b6;
+}
+.form-control {
+    border-radius: 10px;
+    border: 2px solid #0077b6;
+    padding: 10px;
+    font-size: 16px;
+}
+.form-control:focus {
+    border-color: #00b4d8;
+    box-shadow: 0 0 8px rgba(0, 180, 216, 0.5);
+}
+.btn-primary, .btn-success {
+    width: 100%;
+    border-radius: 10px;
+    padding: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    background: #0077b6;
+    border: none;
+    transition: background 0.3s;
+}
+.btn-primary:hover, .btn-success:hover {
+    background: #00b4d8;
+}
+.btn-secondary {
+    width: 100%;
+    margin-top: 10px;
+    border-radius: 10px;
+    padding: 12px;
+    font-size: 16px;
+    background: #6c757d;
+    transition: background 0.3s;
+}
+.btn-secondary:hover {
+    background: #5a6268;
+}
+@media (min-width: 768px) {
+    .card {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+    .card-body {
+        flex: 1;
+        padding: 20px;
+    }
+}
+
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    background-color: #0074CD; /* GCash Blue */
+    color: white;
+    padding: 10px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s ease-in-out;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.back-btn:hover {
+    background-color: #005BAC; /* Darker Blue on Hover */
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.15);
+}
+
