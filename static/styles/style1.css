@@ -1,0 +1,224 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    padding-top: 80px; 
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #0079C1, #66B2FF);
+    font-family: Poppins;
+
+}
+.navbar-brand {
+    font-family: 'Poppins', sans-serif; /* GCash-like font */
+    font-size: 24px;
+    font-weight: bold;
+    background-image: linear-gradient(45deg, #0079C1, #003366); /* GCash blue tones */
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    display: inline-block;
+}
+.navbar-brand:hover {
+    color:#1B3DA6;
+}
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.8); 
+    transition: backdrop-filter 0.3s ease, background-color 0.3s ease;
+}
+
+.scrolled {
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.486); 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+}
+
+.btn-gradient {
+    background: linear-gradient(45deg, #0079C1, #66B2FF);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.btn-gradient:hover {
+    background: linear-gradient(45deg, #005F99, #3388CC);
+    transform: scale(1.05);
+}
+
+
+
+.custom-modal {
+    background: linear-gradient(135deg, #0079C1, #66B2FF);
+    color: white;
+    border: none !important;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+.custom-modal .btn-close {
+    filter: brightness(0) invert(1); /* Makes close button white */
+}
+
+
+.custom-modal .modal-header,
+.custom-modal .modal-footer {
+    border: none;
+}
+
+.custom-modal .modal-title {
+    font-weight: bold;
+}
+
+.custom-modal .form-control {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.568);
+}
+
+.custom-modal .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.custom-modal .btn-close {
+    filter: invert(1);
+}
+
+.custom-modal .modal-footer .btn {
+    border-radius: 20px;
+}
+.modal-backdrop {
+    backdrop-filter: blur(30px) !important; 
+    background: rgba(0, 0, 0, 0.342) !important; 
+}
+
+
+
+.card {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeUp 0.8s ease-out forwards;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+.card {
+    background: rgba(255, 255, 255, 0.1); /* Light transparent white */
+    color: white;
+    border-radius: 16px;
+    padding: 20px;
+    backdrop-filter: blur(10px); /* Adds a frosted glass effect */
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2); /* Soft glow effect */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.3);
+}
+
+
+.card-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.card-text {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.bi {
+    font-size: 22px;
+    margin-right: 8px;
+}
+.borrower-card {
+    background: white;
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 16px;
+    position: relative;
+    transition: all 0.3s ease-in-out;
+}
+.borrower-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+.borrower-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #007bff;
+    font-family: Poppins;
+}
+.borrower-text span {
+    display: block;
+}
+
+.dropdown {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    min-width: 120px;
+    border-radius: 5px;
+}
+.dropdown-content a, .dropdown-content form button {
+    display: block;
+    width: 100%;
+    padding: 8px 12px;
+    text-align: left;
+    border: none;
+    background: none;
+    color: #007bff;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+.dropdown-content a:hover, .dropdown-content form button:hover {
+    background: #f4f6f9;
+}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.floating-btn {
+    
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #0074D9;
+    color: white;
+    border-radius: 50px;
+    padding: 15px 20px;
+    font-size: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
